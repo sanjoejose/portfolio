@@ -14,7 +14,7 @@ const projectsData = {
     shortDescription: "A web application enabling real-time indoor navigation using dynamic QR code triggers and tracking real-time staff availability.",
     tech: ["Python", "HTML", "CSS", "JavaScript", "AutoCAD (SVG Mapping)", "Data Structures"],
     isConfidential: false,
-    liveLink: "https://your-waywiz-link.vercel.app", // <--- UPDATE THIS LINK BEFORE DEPLOYING
+    liveLink: "https://waywiz.pythonanywhere.com/", // <--- UPDATE THIS LINK BEFORE DEPLOYING
     demo: {
       active: true,
       qrAnchor: "/demo-qr-anchor.png", 

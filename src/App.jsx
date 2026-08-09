@@ -204,7 +204,7 @@ export default function Portfolio() {
             <a href="/#contact" className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-medium transition-all shadow-lg shadow-blue-500/25 hover:-translate-y-1">
               Contact Me
             </a>
-            <a href="https://github.com/in/sanjoejose" target="_blank" rel="noreferrer" className={`border px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2 hover:-translate-y-1 ${
+            <a href="https://github.com/sanjoejose" target="_blank" rel="noreferrer" className={`border px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2 hover:-translate-y-1 ${
               darkMode ? 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-200' : 'bg-white hover:bg-slate-100 border-slate-300 text-slate-700 shadow-sm'
             }`}>
               <Github size={18} /> GitHub
