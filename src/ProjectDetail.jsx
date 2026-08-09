@@ -21,8 +21,8 @@ const projectsData = {
       qrLocation: "/demo-qr-location.png", 
       credentials: {
         role: "HODCSE Profile",
-        username: "hodcse", 
-        password: "password123" 
+        username: "E1001", 
+        password: "p1001" 
       },
       note: "Note: The credentials provided above belong to the HODCSE profile. You can log in, change the location using the Employee Location QR code, and immediately verify your real-time updates in the Availability Status tile!",
       howToUse: [
