@@ -102,7 +102,7 @@ export default function ProjectDetail() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
-  
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [darkMode, setDarkMode] = useState(() => {
@@ -360,38 +360,53 @@ export default function ProjectDetail() {
       </div>
 
       {showLaunchModal && project.demo && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-fadeIn">
-          <div className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto bg-slate-900 border border-blue-500/40 rounded-2xl p-6 md:p-8 shadow-2xl space-y-6 text-slate-100">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-md animate-fadeIn">
+          <div className={`relative w-full max-w-3xl max-h-[92vh] overflow-y-auto border rounded-2xl p-6 md:p-8 shadow-2xl space-y-6 transition-colors ${
+            darkMode 
+              ? 'bg-slate-900 border-blue-500/40 text-slate-100' 
+              : 'bg-white border-blue-400 text-slate-800 shadow-blue-500/10'
+          }`}>
             
-            <div className="flex justify-between items-start border-b border-slate-800 pb-4">
+            {/* Modal Header */}
+            <div className={`flex justify-between items-start border-b pb-4 ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-blue-400">Quick Testing Guide</span>
-                <h3 className="text-2xl font-bold text-white mt-1">Setup Before Launching WAYWIZ</h3>
+                <span className="text-xs font-bold uppercase tracking-wider text-blue-500">Quick Testing Guide</span>
+                <h3 className="text-2xl font-bold mt-1">Setup Before Launching WAYWIZ</h3>
               </div>
               <button 
                 onClick={() => setShowLaunchModal(false)}
-                className="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white transition-colors"
+                className={`p-1.5 rounded-lg transition-colors ${
+                  darkMode ? 'bg-slate-800 text-slate-400 hover:text-white' : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                }`}
               >
                 <X size={20} />
               </button>
             </div>
 
+            {/* How To Use Steps */}
             <div className="space-y-4">
               {project.demo.howToUse.map((step, idx) => (
-                <div key={idx} className="flex gap-3 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
-                  <div className="text-blue-400 mt-0.5 shrink-0">{step.icon}</div>
+                <div key={idx} className={`flex gap-3 p-3.5 rounded-xl border ${
+                  darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
+                }`}>
+                  <div className="text-blue-500 mt-0.5 shrink-0">{step.icon}</div>
                   <div>
-                    <h4 className="font-bold text-slate-200 text-sm">{step.title}</h4>
-                    <p className="text-slate-400 text-xs mt-1 leading-relaxed">{step.desc}</p>
+                    <h4 className="font-bold text-sm">{step.title}</h4>
+                    <p className={`text-xs mt-1 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>{step.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
 
+            {/* Testing Artifacts Grid */}
             <div className="grid md:grid-cols-3 gap-4 pt-2">
-              <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 flex flex-col items-center text-center">
-                <span className="text-xs font-bold text-slate-300 mb-2">1. Path Finder QR</span>
-                <div className="w-36 h-36 bg-white rounded p-1 flex items-center justify-center">
+              
+              {/* QR 1 */}
+              <div className={`border rounded-xl p-4 flex flex-col items-center text-center ${
+                darkMode ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-200'
+              }`}>
+                <span className="text-xs font-bold mb-2">1. Path Finder QR</span>
+                <div className="w-36 h-36 bg-white rounded p-1 flex items-center justify-center border border-slate-200 shadow-sm">
                   <img 
                     src={project.demo.qrAnchor} 
                     alt="Path Finder QR" 
@@ -399,12 +414,15 @@ export default function ProjectDetail() {
                     onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '<span class="text-xs text-slate-500">demo-qr-anchor.png missing</span>'; }}
                   />
                 </div>
-                <p className="text-[11px] text-slate-400 mt-2">Scan in Navigation module</p>
+                <p className={`text-[11px] mt-2 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Scan in Navigation module</p>
               </div>
 
-              <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 flex flex-col items-center text-center">
-                <span className="text-xs font-bold text-slate-300 mb-2">2. Employee Location QR</span>
-                <div className="w-36 h-36 bg-white rounded p-1 flex items-center justify-center">
+              {/* QR 2 */}
+              <div className={`border rounded-xl p-4 flex flex-col items-center text-center ${
+                darkMode ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-200'
+              }`}>
+                <span className="text-xs font-bold mb-2">2. Employee Location QR</span>
+                <div className="w-36 h-36 bg-white rounded p-1 flex items-center justify-center border border-slate-200 shadow-sm">
                   <img 
                     src={project.demo.qrLocation} 
                     alt="Location Update QR" 
@@ -412,52 +430,64 @@ export default function ProjectDetail() {
                     onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '<span class="text-xs text-slate-500">demo-qr-location.png missing</span>'; }}
                   />
                 </div>
-                <p className="text-[11px] text-slate-400 mt-2">Scan via Staff Login</p>
+                <p className={`text-[11px] mt-2 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Scan via Staff Login</p>
               </div>
 
-              <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+              {/* Credentials */}
+              <div className={`border rounded-xl p-4 flex flex-col justify-between ${
+                darkMode ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-200'
+              }`}>
                 <div>
-                  <span className="text-xs font-bold text-slate-300 flex items-center gap-1.5 mb-3">
-                    <KeyRound size={14} className="text-blue-400" /> HODCSE Credentials
+                  <span className="text-xs font-bold flex items-center gap-1.5 mb-3">
+                    <KeyRound size={14} className="text-blue-500" /> HODCSE Credentials
                   </span>
                   
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between bg-slate-900 border border-slate-800 rounded p-2">
-                      <div className="text-[11px] text-slate-400">
+                    <div className={`flex items-center justify-between border rounded p-2 ${
+                      darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
+                    }`}>
+                      <div className="text-[11px]">
                         <span className="block text-slate-500 text-[10px]">Username</span>
-                        <code className="text-blue-400 font-mono font-bold">{project.demo.credentials.username}</code>
+                        <code className="text-blue-500 font-mono font-bold">{project.demo.credentials.username}</code>
                       </div>
                       <button 
                         onClick={() => copyToClipboard(project.demo.credentials.username, 'user')}
-                        className="p-1 text-slate-400 hover:text-white"
+                        className={`p-1 hover:text-blue-500 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}
                       >
-                        {copiedUser ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                        {copiedUser ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
                       </button>
                     </div>
 
-                    <div className="flex items-center justify-between bg-slate-900 border border-slate-800 rounded p-2">
-                      <div className="text-[11px] text-slate-400">
+                    <div className={`flex items-center justify-between border rounded p-2 ${
+                      darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
+                    }`}>
+                      <div className="text-[11px]">
                         <span className="block text-slate-500 text-[10px]">Password</span>
-                        <code className="text-blue-400 font-mono font-bold">{project.demo.credentials.password}</code>
+                        <code className="text-blue-500 font-mono font-bold">{project.demo.credentials.password}</code>
                       </div>
                       <button 
                         onClick={() => copyToClipboard(project.demo.credentials.password, 'pass')}
-                        className="p-1 text-slate-400 hover:text-white"
+                        className={`p-1 hover:text-blue-500 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}
                       >
-                        {copiedPass ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                        {copiedPass ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
                       </button>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-blue-950/50 border-l-2 border-blue-500 p-2 text-[10px] text-blue-200 mt-3">
+                <div className={`border-l-2 p-2 text-[10px] mt-3 ${
+                  darkMode ? 'bg-blue-950/50 border-blue-500 text-blue-200' : 'bg-blue-50 border-blue-500 text-blue-800'
+                }`}>
                   {project.demo.note}
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-              <p className="text-xs text-slate-400 text-center sm:text-left">
+            {/* Modal Action Footer */}
+            <div className={`pt-4 border-t flex flex-col sm:flex-row justify-between items-center gap-4 ${
+              darkMode ? 'border-slate-800' : 'border-slate-200'
+            }`}>
+              <p className={`text-xs text-center sm:text-left ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                 Keep this tab open or scan the QR codes using your phone while navigating the site!
               </p>
               
