@@ -195,7 +195,7 @@ export default function Portfolio() {
             Programmer Analyst & Full Stack Developer
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-            Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">Sanjoe Jose</span>
+            Hi, I am <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">Sanjoe Jose</span>
           </h1>
           <p className={`text-lg leading-relaxed max-w-2xl ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
             Full-stack developer based in Kerala, India, specializing in Python, React, and cloud data pipelines. I love digging into complex logic and hunting down tricky system bugs. When I'm not writing Python, Java, or React, you can usually find me exploring photography and video editing.

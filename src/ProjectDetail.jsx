@@ -98,6 +98,10 @@ const projectsData = {
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = projectsData[id];
+  // Automatically scroll to top whenever the component mounts or the project ID changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
   
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
