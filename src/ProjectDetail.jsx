@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, ShieldAlert, Cpu, QrCode, KeyRound, 
   Map, ExternalLink, CheckCircle2, AlertOctagon, Waypoints,
@@ -97,7 +97,13 @@ const projectsData = {
 
 export default function ProjectDetail() {
   const { id } = useParams();
+  const navigate = useNavigate(); // Initialize hook
   const project = projectsData[id];
+  // Ensure Project Detail opens at the top instantly
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [id]);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [darkMode, setDarkMode] = useState(() => {
@@ -136,9 +142,16 @@ export default function ProjectDetail() {
     return (
       <div className={`min-h-screen ${darkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'} flex flex-col items-center justify-center p-6 text-center font-sans`}>
         <h1 className="text-3xl font-bold mb-4">Project Not Found</h1>
-        <Link to="/" className="text-blue-500 hover:underline flex items-center gap-2">
-          <ArrowLeft size={18} /> Back to Portfolio
-        </Link>
+        <button 
+  onClick={() => navigate(-1)} 
+  className={`inline-flex items-center gap-2 text-sm transition-colors border px-4 py-2 rounded-lg w-fit cursor-pointer hover:-translate-x-1 ${
+    darkMode 
+      ? 'bg-slate-900 border-slate-800 text-slate-400 hover:text-blue-400' 
+      : 'bg-white border-slate-200 text-slate-600 hover:text-blue-600 shadow-sm'
+  }`}
+>
+  <ArrowLeft size={18} /> Back to Projects
+</button>
       </div>
     );
   }

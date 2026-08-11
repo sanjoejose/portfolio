@@ -53,6 +53,26 @@ export default function Portfolio() {
     }
   }, [darkMode]);
 
+  // Save scroll position continuously while browsing the homepage
+  useEffect(() => {
+    const handleScroll = () => {
+      sessionStorage.setItem('home-scroll-pos', window.scrollY.toString());
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Restore scroll position if returning from a project detail page
+  useEffect(() => {
+    const savedPos = sessionStorage.getItem('home-scroll-pos');
+    if (savedPos && window.location.hash !== '#home') {
+      window.scrollTo({
+        top: parseInt(savedPos, 10),
+        behavior: 'instant'
+      });
+    }
+  }, []);
+
   const toggleTheme = () => setDarkMode(!darkMode);
 
   const skills = {
