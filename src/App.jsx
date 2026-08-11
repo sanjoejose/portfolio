@@ -377,27 +377,27 @@ export default function Portfolio() {
           <h2 className="text-3xl font-bold">Featured Projects</h2>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((proj) => (
             <Link 
               key={proj.id} 
               to={`/project/${proj.id}`}
-              className={`border rounded-xl p-6 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-2 hover:shadow-xl ${
-                darkMode ? 'bg-slate-900/50 border-slate-800 hover:border-blue-500/50 hover:bg-slate-900' : 'bg-white border-slate-200 hover:border-blue-400 shadow-sm'
+              className={`group border rounded-xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                darkMode ? 'bg-slate-900/50 border-slate-800 hover:border-slate-700' : 'bg-white border-slate-200 hover:border-slate-300 shadow-sm'
               }`}
             >
               <div>
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-bold group-hover:text-blue-500 transition-colors">{proj.title}</h3>
-                  <ArrowRight size={18} className="text-slate-500 group-hover:text-blue-500 group-hover:translate-x-1 transition-all shrink-0 mt-1" />
-                </div>
+                <h3 className="text-xl font-bold mb-3 group-hover:text-blue-500 transition-colors">
+                  {proj.title}
+                </h3>
                 <p className={`text-sm leading-relaxed mb-6 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
                   {proj.shortDescription}
                 </p>
               </div>
 
               <div>
-                <div className="flex flex-wrap gap-2 mb-4">
+                {/* Tech Badges */}
+                <div className="flex flex-wrap gap-2 mb-6">
                   {proj.tech.map((t, i) => (
                     <span key={i} className={`text-xs font-semibold px-2.5 py-1 rounded-md border ${
                       darkMode ? 'bg-slate-800 text-blue-400 border-slate-700' : 'bg-slate-100 text-blue-600 border-slate-200'
@@ -406,9 +406,16 @@ export default function Portfolio() {
                     </span>
                   ))}
                 </div>
-                <span className="text-xs text-blue-500 font-medium inline-flex items-center gap-1 group-hover:underline">
-                  View Project Page →
-                </span>
+
+                {/* Seamlessly Integrated Button */}
+                <div className={`w-full py-2.5 px-4 rounded-xl border text-xs font-semibold flex items-center justify-between transition-all duration-200 ${
+                  darkMode 
+                    ? 'bg-slate-800/40 border-slate-700/60 text-slate-300 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600' 
+                    : 'bg-slate-100/70 border-slate-200 text-slate-700 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600'
+                }`}>
+                  <span>Explore Project Details</span>
+                  <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
             </Link>
           ))}
